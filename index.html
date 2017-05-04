@@ -1,1 +1,101 @@
 <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <title>KTHMaps</title>
+
+  <link rel="stylesheet" href="css/onsen-css-components.min.css">
+  <link rel="stylesheet" href="css/onsenui.css">
+
+</head>
+<body>
+
+  <ons-splitter>
+    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+      <ons-page>
+        <ons-list>
+          <ons-list-item onclick="fn.load('homePage')" tappable>
+            Home
+          </ons-list-item>
+          <ons-list-item onclick="fn.load('settingsPage')" tappable>
+            Settings
+          </ons-list-item>
+          <ons-list-item onclick="fn.load('aboutPage')" tappable>
+            About
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content id="content" page="homePage"></ons-splitter-content>
+  </ons-splitter>
+
+  <ons-template id="homePage">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Home
+        </div>
+      </ons-toolbar>
+      <!--Här är kartan-->
+      <div id="map"></div>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="settingsPage">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Settings
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="aboutPage">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          About
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+    
+  <script type="text/javascript">
+    window.fn = {};
+
+    window.fn.open = function() {
+      var menu = document.getElementById('menu');
+      menu.open();
+    };
+
+    window.fn.load = function(page) {
+      var content = document.getElementById('content');
+      var menu = document.getElementById('menu');
+      content.load(page)
+        .then(menu.close.bind(menu));
+    };
+  </script>
+  <script src="js/map.js"></script>
+  <script src="js/onsenui.js"></script>
+  <script  async defer src="https://maps.googleapis.com/maps/api/js?
+    key=AIzaSyCMjylsNX4K1cjbTThx5LcnBrMixyRmQ2g&callback=initMap">
+    </script>
+</body>
+</html>
