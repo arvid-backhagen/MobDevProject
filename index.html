@@ -1,101 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-  <title>KTHMaps</title>
-
   <link rel="stylesheet" href="css/onsen-css-components.min.css">
   <link rel="stylesheet" href="css/onsenui.css">
 
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map.
+     * Bra sida för att köra både onsen och google maps 
+     * https://onsen.io/blog/onsen-ui-google-maps-javascript-api-v3-angularjs-sample-application/ */
+    #map_canvas {
+      position: absolute; 
+      width:100%; 
+      height: 100%; 
+      margin: 0; 
+      padding: 0;   
+      z-index: -1
+    }
+
+    .search-input-map{
+        width:60%;
+        z-index:1;
+        margin-left: auto;
+        margin-right:auto;
+    }
+
+    .par-search{
+        margin-top:10%
+    }
+
+    .par-buttons{
+        position: absolute; 
+        text-align: center; 
+        width:100%; 
+        bottom:0px
+    }
+
+    .btn-delete{
+        z-index:1
+    }
+
+    .btn-distance{
+        z-index:1; margin-left: 5px;
+    }
+  </style>
+    
+  <title>KTHMaps</title>
 </head>
 <body>
 
-  <ons-splitter>
-    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
-      <ons-page>
-        <ons-list>
-          <ons-list-item onclick="fn.load('homePage')" tappable>
-            Home
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('settingsPage')" tappable>
-            Settings
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('aboutPage')" tappable>
-            About
-          </ons-list-item>
-        </ons-list>
-      </ons-page>
-    </ons-splitter-side>
-    <ons-splitter-content id="content" page="homePage"></ons-splitter-content>
-  </ons-splitter>
+  
+  <script>
+    var map;
+    var stockholm = {lat: 59.3498092, lng: 18.0684758};
 
-  <ons-template id="homePage">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">
-          Home
-        </div>
-      </ons-toolbar>
-      <!--Här är kartan-->
-      <div id="map"></div>
-    </ons-page>
-  </ons-template>
-
-  <ons-template id="settingsPage">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">
-          Settings
-        </div>
-      </ons-toolbar>
-    </ons-page>
-  </ons-template>
-
-  <ons-template id="aboutPage">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">
-          About
-        </div>
-      </ons-toolbar>
-    </ons-page>
-  </ons-template>
-    
-  <script type="text/javascript">
-    window.fn = {};
-
-    window.fn.open = function() {
-      var menu = document.getElementById('menu');
-      menu.open();
-    };
-
-    window.fn.load = function(page) {
-      var content = document.getElementById('content');
-      var menu = document.getElementById('menu');
-      content.load(page)
-        .then(menu.close.bind(menu));
-    };
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: stockholm,
+        zoom: 8
+      });
+    }
   </script>
-  <script src="js/map.js"></script>
+  <!--AIzaSyCny12S7Pb_405MlNrAXcNVAJw3IO8sO7k-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCny12S7Pb_405MlNrAXcNVAJw3IO8sO7k&callback=initMap"
+    async defer></script>
+
   <script src="js/onsenui.js"></script>
-  <script  async defer src="https://maps.googleapis.com/maps/api/js?
-    key=AIzaSyCMjylsNX4K1cjbTThx5LcnBrMixyRmQ2g&callback=initMap">
-    </script>
 </body>
 </html>
