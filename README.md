@@ -1,2 +1,0 @@
-# MobDevProject
-Mobile development project
