@@ -1,3 +1,21 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#map {
+      height: 75%;
+      width: 95%;
+}
+
+.jumbotron {
+  height: 12%;
+  margin-bottom: 5px;
+  padding-top: 5px;
+}
+
 .headline {
   text-align: center;
 }
@@ -52,14 +70,15 @@
 }
 
 #pac-input {
+  margin-top: 5px;
   background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
+  padding: 7 11px 7 13px;
   text-overflow: ellipsis;
-  width: 400px;
+  width: 340px;
+  margin-left: 5px;
 }
 
 #pac-input:focus {
