@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>KTH Places</title>
+    <link rel="apple-touch-icon" href="images/icon4.jpg">
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Icon -->
@@ -17,52 +18,53 @@
   </head>
   <body>
 
-    <!-- Headbar -->
-    <div class="jumbotron" class="col-xs-12">
+    <!-- Header -->
+    <div class="jumbotron row">
 
+    <!-- Icon -->
       <div class="icon col-xs-1">
         <img src="images/icon3.gif" class="img-rounded" alt="Cinque Terre" width="50" height="50"/>
       </div>
 
+      <!-- Rubrik -->
       <div class="col-xs-9">
         <h2 class="headline">KTH Places</h2>
       </div>
 
+      <!-- Modal -->
       <div class="col-xs-1">
-
-      <!-- Trigger the modal with a button -->
-      <button type="button" class="button glyphicon glyphicon-info-sign btn-lg" data-toggle="modal" data-target="#myModal">
-      </button>
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About this app</h4>
-              </div>
-              <div class="modal-body">
-                <p>Some text in the modal.</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
+          <!-- Trigger the modal with a button -->
+          <div class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#myModal" style="font-size: 30px">
+            
           </div>
-        </div>
 
       </div>
-      
+
     </div>
+    <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">About this app</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Made by Arvid and Moa for mobilutveckling</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
 
     <!-- Div to show map -->
     <div id="map"></div>
     <input id="pac-input" class="controls" type="text" placeholder="Search for classroom at KTH">
-
-
-      
-
 
     <script>
       var map;
@@ -138,15 +140,13 @@
           map.fitBounds(bounds);
         });
             
-
-
       }
     </script>
 
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASKo20RxUEi1AyesGfXzF4-witdGTYKxw&libraries=places&callback=initMap"
     async defer></script>
-    <script src="javascript/model.js"/>
+    <script src="javascript/model.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
