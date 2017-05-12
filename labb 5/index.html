@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+        shrink-to-fit=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+ 	<script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+ 	<script src="liquidFillGauge.js" language="JavaScript"></script>
+
+ 	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="jumbotron">
+	<h1 style="text-align: center">Dome of visions Data</h1>
+</div>
+
+<div class="row">
+	<div class="col-md-3">
+	</div>
+
+	<div class="col-md-1">
+		<button type="button" id="btn1" onclick="selectRoom(1);" class="btn btn-primary">Room 1</button>
+	</div>
+
+	<div class="col-md-1">
+		<button type="button" id="btn2" onclick="selectRoom(2);" class="btn btn-primary">Room 2</button>
+	</div>
+
+	<div class="col-md-1">
+		<button type="button" id="btn3" onclick="selectRoom(3);" class="btn btn-primary">Room 3</button>
+	</div>
+
+	<div class="col-md-1">
+		<button type="button" id="btn4" onclick="selectRoom(4);" class="btn btn-primary">Room 4</button>
+	</div>
+
+	<div class="col-md-1">
+		<button type="button" id="btn5" onclick="selectRoom(5);" class="btn btn-primary">Room 5</button>
+	</div>
+
+</div>
+
+
+<script>
+
+var sensor = {};
+
+
+var mSensorDataURL = 'http://backup.evothings.com:8082/output/';
+
+function selectRoom(number){
+
+// A subscriber's key (Five other keys also availble at http://smartspaces.r1.kth.se:8082)
+    if (number == 1){
+        sensor.key = "BQa4EqqbgxfMgpBQ8XwNhvP82Dj"
+        sensor.image = "https://evothings.com/demos/dome_pics/IMG_1758.JPG"
+    }
+    if (number == 2){
+        sensor.key = "J3Wgj9qegGFX4r9KlxxGfaeMXQB",
+        sensor.image = "https://evothings.com/demos/dome_pics/IMG_1759.JPG"
+    }
+    if (number == 3){
+        sensor.key = "lB6p49pzXdFGQjpLwzzOTWj10rd",
+        sensor.image = "https://evothings.com/demos/dome_pics/IMG_1762.JPG"
+    }
+    if (number == 4){
+        sensor.key = "L4D98lO9ObtOdzx3PggKIaWmMGA",
+        sensor.image = "https://evothings.com/demos/dome_pics/IMG_1763.JPG"
+    }
+    if (number == 5){
+        sensor.key = "LAjQ9E8PBOiOdzx3PggKIaWmMGA",
+        sensor.image = "https://evothings.com/demos/dome_pics/IMG_1761.JPG"
+    }
+    if (number == 6){
+        sensor.key = "BkPNOapq2WSMgpVlNQQKFYXPBWr",
+        sensor.image = "https://evothings.com/demos/dome_pics/IMG_1760.JPG"
+    }
+    getJSON();
+        //sensor.key = "BQa4EqqbgxfMgpBQ8XwNhvP82Dj";
+    
+};
+
+function getJSON() 
+    {
+    if (window.cordova) 
+        {
+            console.log('Using Apache Cordova HTTP GET function');
+            cordovaHTTP.get(
+                mSensorDataURL + sensor.key + '.json?gt[timestamp]=now-1day&page=1',
+                function (response) 
+                    {
+                        if (response) 
+                            {
+                                sensor.data = JSON.parse(response.data)[0];
+                                sensor.fullData = JSON.parse(response.data);
+                                printData();
+                            }
+                    },
+                function (error) 
+                    {
+                    console.log(JSON.stringify(error));
+                    });
+        }    
+    else 
+        {
+            console.log('Not using Cordova, fallback to AJAX via jquery');
+            $.ajax({
+                    url: mSensorDataURL + sensor.key + ".json?gt[timestamp]=now- 1day",
+                    jsonp: "callback",
+                    cache: true,
+                    dataType: "jsonp",
+                    data: 
+                        {
+                            page: 1
+                        },
+                    success: function(response) 
+                        {
+                            if (response && response[0]) 
+                                {
+                                    sensor.data = response[0];
+                                    sensor.fullData = response;
+                                    console.log(sensor.data);
+                                    printData();
+                                }
+                        }
+                });
+        }
+}
+
+
+function printData()    
+    {
+        var recommendation = ""
+        var color = ""
+        document.getElementById("animation").innerHTML= "";
+
+
+        if (sensor && sensor.data) 
+            {
+            // Display the info.
+            if (sensor.data.t > 22 && sensor.data.t < 26 && sensor.data.l < 4){
+                document.getElementById("animation").innerHTML= '<svg id="fillgauge1" width="97%" height="200"></svg>'
+                gauge1 = loadLiquidFillGauge("fillgauge1", 100)
+                var config1 = liquidFillGaugeDefaultSettings();
+                config1.circleColor = "#009933";
+                color = "#009933";
+                recommendation = "RECOMMENDED"
+            }
+            if (sensor.data.t < 22 && sensor.data.l < 6){
+                document.getElementById("animation").innerHTML= '<svg id="fillgauge1" width="97%" height="200"></svg>'
+                
+                gauge1 = loadLiquidFillGauge("fillgauge1", 50) 
+                var config1 = liquidFillGaugeDefaultSettings();
+                config1.circleColor = "#ff9933";  
+                color = "#ff9933";  
+                recommendation = "NEUTRAL"
+            }                 
+            if (sensor.data.t > 26 && sensor.data.l > 4){
+                document.getElementById("animation").innerHTML= '<svg id="fillgauge1" width="97%" height="200"></svg>'
+                
+                gauge1 = loadLiquidFillGauge("fillgauge1", 20) 
+                var config1 = liquidFillGaugeDefaultSettings();
+                config1.circleColor = "#cc0000";
+                color = "#cc0000";
+                recommendation = "NOT RECOMMENDED"
+            }  
+            if (sensor.data.t > 22 && sensor.data.t < 26 && sensor.data.l > 4){
+                document.getElementById("animation").innerHTML= '<svg id="fillgauge1" width="97%" height="200"></svg>'
+                
+                gauge1 = loadLiquidFillGauge("fillgauge1", 20) 
+                var config1 = liquidFillGaugeDefaultSettings();
+                config1.circleColor = "#009933";
+                color = "#009933";
+                recommendation = "RECOMMENDED"
+            }                              
+                // var gauge2= loadLiquidFillGauge("fillgauge2", sensor.data.l);
+                // var gauge3 = loadLiquidFillGauge("fillgauge3", sensor.data);
+                html =
+                '<div style="background-color: ' + color +'"><h3>' + recommendation + '</h3></div>'
+                 + '<h2>Based on temperature and lumination it is ' + recommendation.toLowerCase() + ' if you want the best experience in the Dome of Vision. </h2>'
+                 + '<br /><div id="time">Time  ' + sensor.data.timestamp + '</div>'
+                 + '<div id="hum">Based on temperature: ' + sensor.data.t + ' °C</div>'
+                 + '<div id="temp">Based on lumination ' + sensor.data.l + ' lux</div>'
+                 + '<img style="width: 200px;" src="' + sensor.image + '" />'
+            } 
+    else 
+            {
+                html = '<h1>Sensor Data</h1>'
+                 + '<br />Sorry, sensor data not available right now :(</br>'
+                 + '<img src="' + sensor.image + '" />'
+            }
+    document.getElementById("printHere").innerHTML= html;
+    }
+
+
+</script>
+
+</body>
+</html>
+
