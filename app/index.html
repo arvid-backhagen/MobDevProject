@@ -84,6 +84,7 @@
       $('#pac-input').keyup(function(e){
         if(e.keyCode==13){
           e.preventDefault();
+          var searchVal = $('#pac-input').value;
           var latlng = { "lat": vhuset.V1[0].geoData.lat, "lng" : vhuset.V1[0].geoData.long}
           map.setCenter(latlng)
           map.setZoom(18)
@@ -114,7 +115,7 @@
 
     <body onload="getLocation()">
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=true?key=AIzaSyASKo20RxUEi1AyesGfXzF4-witdGTYKxw&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASKo20RxUEi1AyesGfXzF4-witdGTYKxw&libraries=places&callback=initMap"
     async defer></script>
 
     <!-- jQuery -->
