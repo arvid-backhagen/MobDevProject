@@ -15,9 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Main CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-
     <script src="javascript/model.js"></script>
-
     <script src="javascript/map.js"></script>
   </head>
   <body>
@@ -38,33 +36,31 @@
       <!-- Modal -->
       <div class="col-xs-1" style="margin-top:15px;">
           <!-- Trigger the modal with a button -->
-          <div class="glyphicon glyphicon-info-sign btn" data-toggle="modal" data-target="#myModal" style="font-size: 30px">
-            
+          <div class="glyphicon glyphicon-info-sign btn" data-toggle="modal" data-target="#myModal" style="font-size: 30px">  
           </div>
-
       </div>
 
     </div>
     <!-- Modal -->
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-            
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">About this app</h4>
-                </div>
-                <div class="modal-body">
-                  <p>Made by Arvid and Moa for mobilutveckling</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-              
-            </div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">About this app</h4>
           </div>
+          <div class="modal-body">
+            <p>Made by Arvid and Moa for mobilutveckling</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
 
     <!-- Div to show map -->
     <div id="map"></div>
@@ -94,10 +90,11 @@
       })
     </script>
 
-
+    <body onload="getLocation()">
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASKo20RxUEi1AyesGfXzF4-witdGTYKxw&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=true?key=AIzaSyASKo20RxUEi1AyesGfXzF4-witdGTYKxw&libraries=places&callback=initMap"
     async defer></script>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
