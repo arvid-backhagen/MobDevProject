@@ -12,7 +12,7 @@ function initMap() {
         position: google.maps.ControlPosition.LEFT_BOTTOM
     }
 
-  });
+    });
   //remove built in info windows
    var noPoi = [
     {
@@ -28,7 +28,8 @@ function initMap() {
       styles: noPoi
     });
 }
-  
+
+
 //Get geolocation
 function getLocation() {
     console.log("getLocation running")

@@ -21,26 +21,27 @@
   <body>
 
     <!-- Header -->
-    <div class="jumbotron row">
-    <input id="textInput" class="controls" type="text" placeholder="Search for classroom at KTH">
+    <div class="jumbotron">
+      <div class="row">
+      <!-- Icon -->
+        <div class="icon col-xs-2">
+          <img src="images/icon3.gif" alt="Cinque Terre" width="50" height="50"/>
+        </div>
 
-    <!-- Icon -->
-      <div class="icon col-xs-2">
-        <img src="images/icon3.gif" alt="Cinque Terre" width="50" height="50"/>
+        <!-- Rubrik -->
+        <div class="col-xs-8">
+          <h2 class="headline">KTH Places</h2>
+        </div>
+
+        <!-- Modal -->
+        <div class="col-xs-1" style="margin-top:15px;">
+            <!-- Trigger the modal with a button -->
+            <div class="glyphicon glyphicon-info-sign btn" data-toggle="modal" data-target="#myModal" style="font-size: 30px">  
+            </div>
+        </div>
       </div>
-
-      <!-- Rubrik -->
-      <div class="col-xs-8">
-        <h2 class="headline">KTH Places</h2>
-      </div>
-
-      <!-- Modal -->
-      <div class="col-xs-1" style="margin-top:15px;">
-          <!-- Trigger the modal with a button -->
-          <div class="glyphicon glyphicon-info-sign btn" data-toggle="modal" data-target="#myModal" style="font-size: 30px">  
-          </div>
-      </div>
-
+      <br>
+      <input id="textInput" class="controls" type="text" placeholder="Search for classroom at KTH" style="width: 100%;">
     </div>
     <!-- Modal -->
           <div class="modal fade" id="myModal" role="dialog">
