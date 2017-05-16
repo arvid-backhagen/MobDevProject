@@ -83,10 +83,7 @@ function addInfoWindow(room, marker) {
             "Adress: " + room.streetAddress + " " + room.streetNumber + " " + "<br/>" +
             "<img src='" + room.imageUrls[1].url + "' style='max-height: 100px; margin-top: 5px' class='img-rounded'>" 
   });
-
-  marker.addListener('click', function() {
   infowindow.open(map, marker);
-  });
 
 }
 

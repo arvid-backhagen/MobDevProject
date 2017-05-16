@@ -45,6 +45,7 @@
       </div>
 
     </div>
+
     <!-- Modal -->
           <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -56,6 +57,8 @@
                   <h4 class="modal-title">About this app</h4>
                 </div>
                 <div class="modal-body">
+                  <p>This web app was made mainly for new students at KTH.
+                  It's an easy-to-use tool to find where your classes are and which floor you can find the correct room on.</p>
                   <p>Made by Arvid and Moa for mobilutveckling</p>
                 </div>
                 <div class="modal-footer">
@@ -85,6 +88,7 @@
 
       $('#pac-input').keyup(function(e){
         if(e.keyCode==13){
+          e.preventDefault();
           var latlng = { "lat": vhuset.V1[0].geoData.lat, "lng" : vhuset.V1[0].geoData.long}
           map.setCenter(latlng)
           console.log("enter pressed")
@@ -92,6 +96,26 @@
           setMarker(vhuset.V1[0], latlng)
         }
       })
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          myPos = {"lat":position.coords.latitude, "lng" : position.coords.longitude};
+          map.setCenter(myPos)
+          var marker = new google.maps.Marker({
+            position: myPos,
+            map: map,
+            title: 'You are here!'
+          });
+
+        },
+        function(error){
+            console.log("hej")
+           alert(error.message);
+           console.log(error.code)
+        }, {
+             enableHighAccuracy: true
+                  ,timeout : 5000
+        }
+    );
     </script>
 
 
