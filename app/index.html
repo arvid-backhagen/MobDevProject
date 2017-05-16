@@ -43,7 +43,6 @@
     </div>
 
     <!-- Modal -->
-<<<<<<< HEAD
           <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
             
@@ -61,30 +60,9 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-              </div>
-              
+              </div> 
             </div>
-=======
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-      
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">About this app</h4>
           </div>
-          <div class="modal-body">
-            <p>Made by Arvid and Moa for mobilutveckling</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
->>>>>>> 330be07231e3bcdca440a0a0723c14711822abfa
-          </div>
-        </div>
-        
-      </div>
-    </div>
 
     <!-- Div to show map -->
     <div id="map"></div>
@@ -108,7 +86,6 @@
           e.preventDefault();
           var latlng = { "lat": vhuset.V1[0].geoData.lat, "lng" : vhuset.V1[0].geoData.long}
           map.setCenter(latlng)
-          console.log("enter pressed")
           map.setZoom(18)
           setMarker(vhuset.V1[0], latlng)
         }
