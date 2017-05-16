@@ -1,5 +1,6 @@
 var map;
 
+//initiate map
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 59.3498092, lng: 18.0684758},
@@ -11,7 +12,6 @@ function initMap() {
         position: google.maps.ControlPosition.LEFT_BOTTOM
     }
   });
-
 
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
@@ -71,10 +71,36 @@ function initMap() {
     });
     map.fitBounds(bounds);
   });
+
+  
       
 }
+  
+//Get geolocation
+function getLocation() {
+    console.log("getLocation running")
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+//Place marker on current position
+function showPosition(position) {
+    console.log(position.coords.latitude);
+    console.log(position.coords.longitude);
+    currPos = {lat: position.coords.latitude, lng: position.coords.longitude};
+    position = map.setCenter(currPos);
+    var marker = new google.maps.Marker({
+      position: currPos,
+      map: map,
+      title: 'Current Position'
+    });
+}
+
+//add info window
 function addInfoWindow(room, marker) {
-  //add info window
   var infowindow = new google.maps.InfoWindow({
   content:  "<b>" + room.placeName + "</b>" + "<br/>" +
             "Byggnad: " + room.buildingName + "<br/>" +
@@ -83,11 +109,14 @@ function addInfoWindow(room, marker) {
             "Adress: " + room.streetAddress + " " + room.streetNumber + " " + "<br/>" +
             "<img src='" + room.imageUrls[1].url + "' style='max-height: 100px; margin-top: 5px' class='img-rounded'>" 
   });
-  infowindow.open(map, marker);
 
+  //open info window on click
+  marker.addListener('click', function() {
+  infowindow.open(map, marker);
+  });
 }
 
-
+//Place new marker
 function setMarker(room, currPos){
   var marker = new google.maps.Marker({
     position: currPos,
