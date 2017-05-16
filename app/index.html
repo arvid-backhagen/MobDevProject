@@ -82,6 +82,16 @@
           cb(data);
         }
       })
+
+      $('#pac-input').keyup(function(e){
+        if(e.keyCode==13){
+          var latlng = { "lat": vhuset.V1[0].geoData.lat, "lng" : vhuset.V1[0].geoData.long}
+          map.setCenter(latlng)
+          console.log("enter pressed")
+          map.setZoom(18)
+          setMarker(vhuset.V1[0], latlng)
+        }
+      })
     </script>
 
 
