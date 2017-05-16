@@ -1,20 +1,3 @@
-function cb(data){
-	console.log(data);
-};
-
-$.ajax( {
-	url: 'https://www.kth.se/api/places/v3/room/name/v2',
-	headers: {'api_key': 'arjYt564HFYiiias342z'},
-	success: function(data) {
-		console.log(data);
-		cb(data);
-	},
-	error: function(exception){
-		console.log(exception);
-	}
-});
-
-
 var vhuset = {"V1": [
   {
     "_id": "5b3e2d05-8da8-405e-ac62-7960935363ab",
@@ -357,3 +340,6 @@ var vhuset = {"V1": [
   }
 ]
 }
+
+console.log(vhuset.V1[0].geoData.lat)
+console.log(vhuset.V1[0].geoData.long)

@@ -15,6 +15,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Main CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script src="javascript/model.js"></script>
+
+    <script src="javascript/map.js"></script>
   </head>
   <body>
 
@@ -22,19 +26,19 @@
     <div class="jumbotron row">
 
     <!-- Icon -->
-      <div class="icon col-xs-1">
-        <img src="images/icon3.gif" class="img-rounded" alt="Cinque Terre" width="50" height="50"/>
+      <div class="icon col-xs-2">
+        <img src="images/icon3.gif" alt="Cinque Terre" width="50" height="50"/>
       </div>
 
       <!-- Rubrik -->
-      <div class="col-xs-9">
+      <div class="col-xs-8">
         <h2 class="headline">KTH Places</h2>
       </div>
 
       <!-- Modal -->
-      <div class="col-xs-1">
+      <div class="col-xs-1" style="margin-top:22px;">
           <!-- Trigger the modal with a button -->
-          <div class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#myModal" style="font-size: 30px">
+          <div class="glyphicon glyphicon-info-sign btn" data-toggle="modal" data-target="#myModal" style="font-size: 30px">
             
           </div>
 
@@ -67,83 +71,6 @@
     <input id="pac-input" class="controls" type="text" placeholder="Search for classroom at KTH">
 
     <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 59.3498092, lng: 18.0684758},
-          zoom: 15,
-          mapTypeControl: true,
-          mapTypeControlOptions: {
-              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-              mapTypeIds: ['roadmap', 'hybrid', 'satellite'],
-              position: google.maps.ControlPosition.LEFT_BOTTOM
-          }
-        });
-
-
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-        var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-            return;
-          }
-
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-          });
-          map.fitBounds(bounds);
-        });
-            
-      }
-    </script>
-
-    <script>
 
       $.ajax( {
         url: 'https://www.kth.se/api/places/v3/room/name/v2',
@@ -161,7 +88,6 @@
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASKo20RxUEi1AyesGfXzF4-witdGTYKxw&libraries=places&callback=initMap"
     async defer></script>
-    <script src="javascript/model.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
