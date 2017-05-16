@@ -1,11 +1,12 @@
 function getRoomObject(roomName) {
     for (i=0; i < kth.length; i++) {
         if (kth[i].name == roomName) {
+            console.log("matchning");
+            console.log(kth[i]);
             return kth[i];
-        }
-        else {
-            alert("Can't find room");
-        }
+
+            break;
+        }   
     }
 }
 
