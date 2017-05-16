@@ -1,4 +1,16 @@
-var KTH = [
+function getRoomObject(roomName) {
+    for (i=0; i < kth.length; i++) {
+        if (kth[i].name == roomName) {
+            return kth[i];
+        }
+        else {
+            alert("Can't find room");
+        }
+    }
+}
+
+
+var kth = [
   {
     "region": "KTH Campus",
     "webUrl": "/places/room/A43:03/1452",

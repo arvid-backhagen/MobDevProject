@@ -85,7 +85,6 @@
         if(e.keyCode==13){
           var searchVal = document.getElementById('pac-input').value;
           var room = getRoomObject(searchVal);
-
           var latlng = { "lat": room.latitude, "lng" : room.longitude}
           map.setCenter(latlng)
           map.setZoom(18)
